@@ -1,0 +1,7 @@
+FROM jupyter/scipy-notebook:c33a7dc0eece
+
+# install astropy to the Python3
+RUN conda install --quiet --yes astropy
+
+USER jovyan
+

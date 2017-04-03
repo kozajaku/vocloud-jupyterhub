@@ -1,0 +1,14 @@
+FROM jupyterhub/jupyterhub-onbuild:latest
+
+ADD cull_idle_servers.py /srv/jupyterhub/cull_idle_servers.py
+
+# Install dockerspawner and vocloud authenticator
+RUN /opt/conda/bin/pip install \
+    git+https://github.com/kozajaku/vocloud-authenticator.git#egg=vocloud-authenticator \
+    dockerspawner==0.5.* \
+    python-dateutil
+
+# install docker on the jupyterhub container
+RUN wget https://get.docker.com -q -O /tmp/getdocker && \
+    chmod +x /tmp/getdocker && \
+    sh /tmp/getdocker
